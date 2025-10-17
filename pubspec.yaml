@@ -1,0 +1,27 @@
+name: flutter_alliance_2025
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.9.0
+
+dependencies:
+  animated_to: ^0.4.0
+  flutter:
+    sdk: flutter
+  flutter_deck: ^0.22.0
+  flutter_inappwebview: ^6.1.5
+  gap: ^3.0.1
+  springster: ^0.4.0+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
