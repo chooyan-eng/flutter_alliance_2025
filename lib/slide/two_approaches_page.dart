@@ -97,6 +97,7 @@ class _TwoApproachesPageState extends State<TwoApproachesPage>
                           ),
                           Gap(40),
                           _CodeImplicit(
+                            isBottom: _isGapExpanded,
                             onTap: () {
                               setState(() => _isGapExpanded = !_isGapExpanded);
                             },
@@ -213,30 +214,38 @@ class _CodeExplicitState extends State<_CodeExplicit> {
 
 final _code11 = '''
 AnimatedContainer(
-  duration: const Duration(milliseconds: 460),
+  duration: const Duration(milliseconds: 1000),
   curve: Curves.easeIn,
-  height: _isBottom ? 460 : 0,
+  height: ''';
+
+final _code12 = '_isBottom';
+final _code13 = ' ? ';
+final _code14 = '460';
+final _code15 = ' : ';
+final _code16 = '0';
+final _code17 = '''
 );
 ''';
 
-final _code12 = '''
+final _code18 = '''
 
 ...
 
 onTap: () {
 ''';
 
-final _code13 = '''
+final _code19 = '''
   setState(() => _isBottom = !_isBottom);
 ''';
 
-final _code14 = '''
+final _code20 = '''
 }
 ''';
 
 class _CodeImplicit extends StatefulWidget {
-  const _CodeImplicit({required this.onTap});
+  const _CodeImplicit({required this.onTap, required this.isBottom});
   final VoidCallback onTap;
+  final bool isBottom;
 
   @override
   State<_CodeImplicit> createState() => _CodeImplicitState();
@@ -265,16 +274,37 @@ class _CodeImplicitState extends State<_CodeImplicit> {
                 text: _code11,
                 style: TextStyle(color: Colors.orangeAccent),
               ),
-              TextSpan(text: _code12),
               TextSpan(
-                text: _code13,
+                text: _code12,
+                style: TextStyle(
+                  color: widget.isBottom ? Colors.orangeAccent : null,
+                ),
+              ),
+              TextSpan(text: _code13),
+              TextSpan(
+                text: _code14,
+                style: TextStyle(
+                  color: widget.isBottom ? Colors.orangeAccent : null,
+                ),
+              ),
+              TextSpan(text: _code15),
+              TextSpan(
+                text: _code16,
+                style: TextStyle(
+                  color: widget.isBottom ? null : Colors.orangeAccent,
+                ),
+              ),
+              TextSpan(text: _code17),
+              TextSpan(text: _code18),
+              TextSpan(
+                text: _code19,
                 style: TextStyle(
                   color: _isPressed
                       ? Colors.orange.shade900
                       : Colors.orangeAccent,
                 ),
               ),
-              TextSpan(text: _code14),
+              TextSpan(text: _code20),
             ],
           ),
         ),
