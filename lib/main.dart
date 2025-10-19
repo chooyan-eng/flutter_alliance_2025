@@ -1,11 +1,13 @@
 import 'dart:async';
 
+import 'package:animated_to/animated_to.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_alliance_2025/slide/animated_to_page.dart';
 import 'package:flutter_alliance_2025/slide/basic_demo_page.dart';
 import 'package:flutter_alliance_2025/slide/customize_renderobject_page.dart';
 import 'package:flutter_alliance_2025/slide/draggable_demo_page.dart';
 import 'package:flutter_alliance_2025/slide/framework_figure_page.dart';
+import 'package:flutter_alliance_2025/slide/global_key_page.dart';
 import 'package:flutter_alliance_2025/slide/graph_demo_page.dart';
 import 'package:flutter_alliance_2025/slide/height_quiz_answer_page.dart';
 import 'package:flutter_alliance_2025/slide/height_quiz_page.dart';
@@ -53,28 +55,63 @@ final slides = [
   GraphDemoPage.slide,
   UpToYouPage.slide,
   NextChallengePage.slide,
+  GlobalKeyPage.slide,
   ThanksPage.slide,
 ];
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
 
   @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  bool _isTimerRunning = false;
+  final _startTime = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      setState(() => _isTimerRunning = true);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return FlutterDeckApp(
-      darkTheme: FlutterDeckThemeData.dark().copyWith(
-        textTheme: const FlutterDeckTextTheme(
-          title: TextStyle(fontSize: 40),
-          subtitle: TextStyle(fontSize: 36),
-          bodyLarge: TextStyle(fontSize: 30),
-          bodyMedium: TextStyle(fontSize: 24),
-        ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Stack(
+        children: [
+          FlutterDeckApp(
+            darkTheme: FlutterDeckThemeData.dark().copyWith(
+              textTheme: const FlutterDeckTextTheme(
+                title: TextStyle(fontSize: 40),
+                subtitle: TextStyle(fontSize: 36),
+                bodyLarge: TextStyle(fontSize: 30),
+                bodyMedium: TextStyle(fontSize: 24),
+              ),
+            ),
+            configuration: FlutterDeckConfiguration(
+              // slideSize: FlutterDeckSlideSize.custom(width: 1920, height: 1080),
+            ),
+            themeMode: ThemeMode.dark,
+            slides: slides,
+          ),
+          Positioned(
+            top: 10,
+            left: _isTimerRunning ? null : 10,
+            right: _isTimerRunning ? 10 : null,
+            child: AnimatedTo.curve(
+              globalKey: GlobalObjectKey('timer'),
+              duration: _presentationDuration,
+              curve: Curves.linear,
+              child: _Timer(startTime: _startTime),
+            ),
+          ),
+        ],
       ),
-      configuration: FlutterDeckConfiguration(
-        // slideSize: FlutterDeckSlideSize.custom(width: 1920, height: 1080),
-      ),
-      themeMode: ThemeMode.dark,
-      slides: slides,
     );
   }
 }

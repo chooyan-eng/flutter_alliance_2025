@@ -71,14 +71,14 @@ class _TitlePageState extends State<TitlePage> {
                         children: [
                           Gap(120),
                           Text(
-                            '주조 쓰요시',
+                            '추조 쓰요시',
                             style: FlutterDeckTheme.of(
                               context,
                             ).textTheme.bodyLarge.copyWith(color: Colors.black),
                           ),
                           Gap(16),
                           Text(
-                            '프리랜서 플러터 개발자',
+                            '프리랜서 플러터 개발자 🇯🇵',
                             style: FlutterDeckTheme.of(context)
                                 .textTheme
                                 .bodyMedium
