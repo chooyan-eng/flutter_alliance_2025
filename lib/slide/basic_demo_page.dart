@@ -13,17 +13,16 @@ class BasicDemoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          InAppWebView(
-            initialUrlRequest: URLRequest(
-              url: WebUri(
-                'https://dartpad.dev/?id=7864595840215a5876a1fbddcf58d18c',
-              ),
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: 60),
+        child: InAppWebView(
+          initialUrlRequest: URLRequest(
+            url: WebUri(
+              'https://dartpad.dev/?id=7864595840215a5876a1fbddcf58d18c',
             ),
-            initialSettings: InAppWebViewSettings(pageZoom: 1.5),
           ),
-        ],
+          initialSettings: InAppWebViewSettings(pageZoom: 1.5),
+        ),
       ),
     );
   }
